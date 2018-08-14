@@ -1,1 +1,8 @@
 #regex tabs to spaces--> :%s/\t/ /g
+docker-compose -f docker-compose-dev.yml (up -d) V (logs)
+eval "$(docker-machine env testdriven-dev)"
+docker-compose -f docker-compose-dev.yml up -d --build
+docker-machine ip testdriven-dev
+docker exec -ti $(docker ps -aqf "name=users-db") psql -U postgres
+# Running manager commands from outside of VM
+docker-compose -f docker-compose-dev.yml    run users-service python manage.py recreate_db
